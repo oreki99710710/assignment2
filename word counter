@@ -1,0 +1,45 @@
+#include <stdio.h>
+
+#define BEGIN 1; //符号变量，表示当前位置是否在单词之中，表示当前的状态。
+				 //用符号变量更可读。
+
+int main(int argc, char *argv[])
+{
+    int characters, lines, words, state;
+    char c;
+
+    state = characters = lines = words = 0; // characters 字符，lines 行，words 单词。
+    while((c = getchar()) != '0')  /*设置一个变量，得到一个从键盘输入的字符。
+									 循环条件是当从键盘输入的字符不是0，当为0时停止循环。
+								   */
+	{
+        characters++;			//此时则为一个字符。
+        if(c == '\n')			//此时换行。
+		{
+            lines++;
+            state = 0;
+            continue;
+        } 
+		else if(c == ' ')		//此时为一个空格。
+		{
+            state = 0;
+            continue;
+        } 
+		else if(c == '\t')		//此时为一个制表符。
+		{
+            state = 0;
+            continue;
+        } 
+		else 
+		{
+            if(state == 0) //不为制表符，不为空格，不为换行则认为是一个单词。
+			{
+                state = BEGIN;
+                words++;
+            }
+            continue;
+        }
+    }
+
+    printf("%d characters. %d words. %d lines.\n", characters, words, lines);//输出结果。
+}
