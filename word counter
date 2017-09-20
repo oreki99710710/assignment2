@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
         if(c == '\n')			//此时换行。
 		{
             lines++;
-            state = 0;
+            state = 0;			//此时在单词之外，置state=0
             continue;
         } 
 		else if(c == ' ')		//此时为一个空格。
@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
         } 
 		else 
 		{
-            if(state == 0) //不为制表符，不为空格，不为换行则认为是一个单词。
+            if(state == 0) //此时不在单词之中
 			{
                 state = BEGIN;
                 words++;
